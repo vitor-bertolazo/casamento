@@ -1,7 +1,7 @@
 body{
     margin:0;
-    font-family:Arial,Helvetica,sans-serif;
-    background:#faf7f2;
+    font-family:'Inter',sans-serif;
+    background:#f5f1ea;
     color:#333;
 }
 
@@ -12,7 +12,11 @@ body{
 }
 
 h1{
-    text-align:center;
+    text-align: center;
+}
+
+h1,h2{
+    font-family:'Playfair Display',serif;
 }
 
 .subtitulo{
@@ -86,23 +90,86 @@ h1{
     margin-top:50px;
 }
 
-.ranking-item {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+#ranking-list{
+    display:flex;
+    justify-content:center;
+    gap:25px;
+    flex-wrap:wrap;
+    margin-top:20px;
+    margin-bottom:50px;
 }
 
-.ranking-nome {
-    font-size: 22px;
+.ranking-item{
+    width:190px;
+    background:white;
+    border-radius:14px;
+    padding:20px;
+    box-shadow:0 6px 18px rgba(0,0,0,.08);
+    transition:.2s;
 }
 
-.ranking-titulo {
-    font-size: 13px;
-    color: #777;
-    margin-top: 4px;
+.ranking-item:hover{
+    transform:translateY(-4px);
 }
 
-.ranking-valor {
-    font-weight: bold;
-    font-size: 20px;
+.ranking-info{
+    width:100%;
+}
+
+.ranking-nome{
+    display:grid;
+    grid-template-columns:32px 1fr;
+    align-items:center;
+    column-gap:12px;
+    width:100%;
+}
+
+.ranking-medalha{
+    font-size:24px;
+    text-align:center;
+}
+
+.ranking-nome-texto{
+    font-size:22px;
+    font-weight:700;
+    line-height:1.2;
+    text-align:left;
+}
+
+.ranking-titulo{
+    margin-top:10px;
+    margin-left:44px;   /* mesma largura da coluna da medalha + gap */
+    font-size:14px;
+    color:#777;
+    text-align:left;
+}
+
+@media (max-width:600px){
+
+    #ranking-list{
+        flex-direction:column;
+        align-items:center;
+        gap:18px;
+    }
+
+    .ranking-item{
+        width:260px;
+    }
+
+    .ranking-nome{
+        justify-content:center;
+    }
+
+    .ranking-medalha{
+        font-size:24px;
+    }
+
+    .ranking-nome-texto{
+        font-size:20px;
+    }
+
+    .ranking-titulo{
+        font-size:14px;
+    }
+
 }

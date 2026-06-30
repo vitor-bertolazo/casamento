@@ -17,8 +17,6 @@ async function carregarDados() {
     renderCategoria(categoriaAtual);
 
     renderRanking();
-
-    renderTotal();
 }
 
 function criarCategorias() {
@@ -72,6 +70,16 @@ function renderCategoria(categoria) {
     presentes
         .filter(x =>
             x.Categoria === categoria)
+        .sort((a, b) => {
+
+            const aDoado = a.Doado === 'TRUE';
+            const bDoado = b.Doado === 'TRUE';
+
+            if (aDoado !== bDoado)
+                return aDoado - bDoado;
+
+            return Number(a.Valor) - Number(b.Valor);
+        })
         .forEach(item => {
 
             const doado =
@@ -114,15 +122,13 @@ function renderRanking() {
     const ranking = {};
 
     presentes
-        .filter(x =>
-            x.Doado === 'TRUE')
+        .filter(x => x.Doado === 'TRUE')
         .forEach(item => {
 
             if (!ranking[item.Doador])
                 ranking[item.Doador] = 0;
 
-            ranking[item.Doador] +=
-                Number(item.Valor);
+            ranking[item.Doador] += Number(item.Valor);
         });
 
     const ordenado =
@@ -134,8 +140,7 @@ function renderRanking() {
 
     div.innerHTML = '';
 
-    const medalhas =
-        ['🥇', '🥈', '🥉'];
+    const medalhas = ['🥇', '🥈', '🥉'];
 
     const titulos = [
         "🍺 Mestre Cervejeiro",
@@ -143,30 +148,38 @@ function renderRanking() {
         "🌊 Rei/Rainha da Praia"
     ];
 
-    ordenado.forEach(([nome, valor], index) => {
+    ordenado.slice(0,3).forEach(([nome], index) => {
 
         const item = document.createElement('div');
 
         item.className = 'ranking-item';
 
         item.innerHTML = `
-    <div class="ranking-info">
-        <div class="ranking-nome">
-            ${medalhas[index] || '🏅'} ${nome}
-        </div>
+            <div class="ranking-info">
 
-        <div class="ranking-titulo">
-            ${titulos[index] || 'Amigo Investidor'}
-        </div>
-    </div>
+                <div class="ranking-nome">
 
-    <div class="ranking-valor">
-        R$ ${valor.toFixed(2)}
-    </div>
-`;
+                    <span class="ranking-medalha">
+                        ${medalhas[index]}
+                    </span>
+
+                    <span class="ranking-nome-texto">
+                        ${nome}
+                    </span>
+
+                </div>
+
+                <div class="ranking-titulo">
+                    ${titulos[index]}
+                </div>
+
+            </div>
+        `;
 
         div.appendChild(item);
+
     });
+
 }
 
 function renderTotal() {
