@@ -4,6 +4,9 @@ const SHEET_URL =
 let presentes = [];
 let categoriaAtual = null;
 
+const PIX_CODE =
+    "00020101021126330014br.gov.bcb.pix0111219579308295204000053039865802BR5925VITOR";
+
 async function carregarDados() {
 
     const response = await fetch(SHEET_URL);
@@ -148,7 +151,7 @@ function renderRanking() {
         "🌊 Rei/Rainha da Praia"
     ];
 
-    ordenado.slice(0,3).forEach(([nome], index) => {
+    ordenado.slice(0, 3).forEach(([nome], index) => {
 
         const item = document.createElement('div');
 
@@ -208,3 +211,51 @@ setInterval(
     carregarDados,
     30000
 );
+
+document
+    .getElementById('copiar-pix')
+    .addEventListener('click', async () => {
+
+        const botao =
+            document.getElementById('copiar-pix');
+
+        try {
+
+            await navigator.clipboard.writeText(
+                PIX_CODE
+            );
+
+            botao.textContent =
+                '✅ Código PIX copiado!';
+
+            botao.classList.add(
+                'copiado'
+            );
+
+            setTimeout(() => {
+
+                botao.textContent =
+                    '📋 Copiar código PIX';
+
+                botao.classList.remove(
+                    'copiado'
+                );
+
+            }, 3000);
+
+        }
+        catch {
+
+            botao.textContent =
+                '❌ Erro ao copiar';
+
+            setTimeout(() => {
+
+                botao.textContent =
+                    '📋 Copiar código PIX';
+
+            }, 3000);
+
+        }
+
+    });
