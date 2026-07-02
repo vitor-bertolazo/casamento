@@ -207,11 +207,6 @@ function renderTotal() {
 
 carregarDados();
 
-setInterval(
-    carregarDados,
-    30000
-);
-
 document
     .getElementById('copiar-pix')
     .addEventListener('click', async () => {
