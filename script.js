@@ -105,15 +105,6 @@ function renderCategoria(categoria) {
                 <div class="valor">
                     R$ ${Number(item.Valor).toFixed(2)}
                 </div>
-
-                ${doado
-                    ?
-                    `<div class="doador">
-                        Patrocinado por ${item.Doador}
-                    </div>`
-                    :
-                    ''
-                }
             `;
 
             container.appendChild(div);
