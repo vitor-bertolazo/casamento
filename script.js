@@ -176,26 +176,6 @@ function renderRanking() {
 
 }
 
-function renderTotal() {
-
-    const total =
-        presentes
-            .filter(x =>
-                x.Doado === 'TRUE')
-            .reduce(
-                (acc, x) =>
-                    acc + Number(x.Valor),
-                0
-            );
-
-    document
-        .getElementById(
-            'total-arrecadado'
-        )
-        .innerHTML =
-        `🍺 Total patrocinado: <strong>R$ ${total.toFixed(2)}</strong>`;
-}
-
 carregarDados();
 
 document
